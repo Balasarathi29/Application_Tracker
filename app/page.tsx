@@ -39,7 +39,7 @@ export default function Home() {
                   <Briefcase className="h-6 w-6 text-primary" />
                 </div>
                 <h3 className="mb-3 text-2xl font-semibold text-black">
-                  Organize
+                  Organize Applications
                 </h3>
                 <p className="text-muted-foreground">
                   Create custom boards and columns to track your job
