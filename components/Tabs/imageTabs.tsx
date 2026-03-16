@@ -25,8 +25,8 @@ export default function ImageTabs() {
               Get Hired
             </Button>
             <Button
-              onClick={() => setActiveTab("manageBoards")}
-              className={`rounded-lg px-6 py-3 text-sm font-medium transition-colors ${activeTab === "manageBoards" ? "bg-primary text-white" : "bg-gray-100 text-gray-700 hover:bg-gray-200"}`}
+              onClick={() => setActiveTab("Boards")}
+              className={`rounded-lg px-6 py-3 text-sm font-medium transition-colors ${activeTab === "Boards" ? "bg-primary text-white" : "bg-gray-100 text-gray-700 hover:bg-gray-200"}`}
             >
               Manage Boards
             </Button>
@@ -50,7 +50,7 @@ export default function ImageTabs() {
               />
             )}
 
-            {activeTab === "manageBoards" && (
+            {activeTab === "Boards" && (
               <Image
                 src="/hero_image/hero3.png"
                 alt="Manage Boards"
