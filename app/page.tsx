@@ -39,7 +39,7 @@ export default function Home() {
                   <Briefcase className="h-6 w-6 text-primary" />
                 </div>
                 <h3 className="mb-3 text-2xl font-semibold text-black">
-                  Organize Applications
+                  Organize Application
                 </h3>
                 <p className="text-muted-foreground">
                   Create custom boards and columns to track your job
@@ -66,8 +66,7 @@ export default function Home() {
                   Stay Organized
                 </h3>
                 <p className="text-muted-foreground">
-                  Never lose track of an application. Keep all your job search
-                  information in one centralized place.
+                  Never lose track of an application. 
                 </p>
               </div>
             </div>
