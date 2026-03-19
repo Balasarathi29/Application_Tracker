@@ -1,9 +1,8 @@
 import { betterAuth } from "better-auth";
 import { mongodbAdapter } from "better-auth/adapters/mongodb";
-import { Db, MongoClient } from "mongodb";
-import { mongodbUrl } from "../config/keys";
+import { MongoClient } from "mongodb";
 
-const client = new MongoClient(mongodbUrl);
+const client = new MongoClient(process.env.MONGODB_URL!);
 const db = client.db();
 
 export const auth = betterAuth({
@@ -14,3 +13,4 @@ export const auth = betterAuth({
     enabled : true,
   }
 });
+
