@@ -9,6 +9,7 @@ import { useState} from "react";
 import { signUp } from "@/lib/auth/auth-client";
 import { useRouter } from "next/navigation";
 
+
 export default function SignUp() {
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
