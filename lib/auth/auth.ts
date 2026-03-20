@@ -1,8 +1,9 @@
 import { betterAuth } from "better-auth";
 import { mongodbAdapter } from "better-auth/adapters/mongodb";
 import { MongoClient } from "mongodb";
-import { redirect } from "next/dist/server/api-utils";
 import { headers } from "next/headers";
+import { redirect } from "next/navigation";
+
 
 const uri = process.env.MONGODB_URI;
 if (!uri) throw new Error("MONGODB_URI is not set");

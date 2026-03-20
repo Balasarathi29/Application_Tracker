@@ -10,11 +10,11 @@ export default function SignOutBtn() {
     return (
         <DropdownMenuItem onClick={async () => {
             const result = await signOut();
-            if(!result.error){
-                router.push("/sign-in")
-            } else {
-                alert(result.error.message || "Failed to sign out. Please try again.")
-            }   
+            if (result.data){
+                router.push("/sign-in");
+            }else{
+                alert("Failed to Log out. Please try again.");
+            }
         }}>
             Log Out
         </DropdownMenuItem>

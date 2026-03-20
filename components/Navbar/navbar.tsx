@@ -3,13 +3,13 @@
 import { Briefcase } from "lucide-react";
 import Link from "next/link";
 import { Button } from "../ui/button";
-import { getSession } from "@/lib/auth/auth";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from "../ui/dropdown-menu";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuTrigger } from "../ui/dropdown-menu";
 import { Avatar, AvatarFallback } from "../ui/avatar";
 import SignOutBtn from "../ui/signOutBtn";
+import { useSession } from "@/lib/auth/auth-client";
 
-export default async function Navbar() {
-    const {} = useSession
+export default function Navbar() {
+    const {data: session} = useSession();
     return ( 
     <nav className="border-b border-gray-200 bg-white">
         <div className = "container mx-auto flex h-16 items-center px-4 justify-between">
@@ -35,8 +35,8 @@ export default async function Navbar() {
                             </Avatar>
                         </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent className="">
-                        <DropdownMenuLabel className=""> 
+                    <DropdownMenuContent className="w-56" align="end">
+                        <DropdownMenuLabel className="font-normal"> 
                             <div className="flex flex-col space-y-1"> 
                                 <p className="text-sm font-medium leading-none">{session.user.name}</p>
                                 <p className="text-xs text-muted-foreground leading-none">{session.user.email}</p>
