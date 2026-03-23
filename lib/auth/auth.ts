@@ -6,44 +6,48 @@ import { redirect } from "next/navigation";
 import { initializeUserBoard } from "../init-user-board";
 import { userAc } from "better-auth/plugins/admin/access";
 
-
 const uri = process.env.MONGODB_URI;
 if (!uri) throw new Error("MONGODB_URI is not set");
 
 const client = new MongoClient(uri);
-await client.connect();          // top-level await is supported in Next routes
+await client.connect(); // top-level await is supported in Next routes
 const db = client.db();
 
 export const auth = betterAuth({
-  database: mongodbAdapter(db ,{
+  // Base URL is required so Better Auth can generate correct callback/redirect URLs
+  baseURL:
+    process.env.BETTER_AUTH_URL ||
+    process.env.NEXT_PUBLIC_APP_URL ||
+    "http://localhost:3000",
+  database: mongodbAdapter(db, {
     client,
   }),
-  emailAndPassword :{
-    enabled : true,
+  emailAndPassword: {
+    enabled: true,
   },
-  databaseHooks : {
-    user:{
-      create : {
-        after : async (user) =>{
-          if(user.id){
-            await initializeUserBoard(user.id)
+  databaseHooks: {
+    user: {
+      create: {
+        after: async (user) => {
+          if (user.id) {
+            await initializeUserBoard(user.id);
           }
-        }
-      }
-    }
-  }
+        },
+      },
+    },
+  },
 });
 
 export async function getSession() {
   const result = await auth.api.getSession({
-    headers : await headers(),
+    headers: await headers(),
   });
-  return result
+  return result;
 }
 
 export async function signOut() {
   const result = await auth.api.signOut({
-    headers : await headers(),
+    headers: await headers(),
   });
   if (result.success) {
     redirect("/sign-in");

@@ -1,6 +1,6 @@
 import "./board";
 import "./column";
-import "./job-application";
+import "./jobApplication";
 
 export { default as Board } from "./board";
 export { default as Column } from "./column";
