@@ -1,25 +1,24 @@
-import { getSession } from "@/lib/auth/auth"
-import connectDB from "@/lib/db"
-import { Board } from "@/lib/models"
-import { redirect } from "next/navigation"
-import KanbanBoard from "@/components/kanbanBoard"
-
+import KanbanBoard from "@/components/kanbanBoard";
+import { getSession } from "@/lib/auth/auth";
+import connectDB from "@/lib/db";
+import { Board } from "@/lib/models";
+import { redirect } from "next/navigation";
 
 
 export default async function Dashboard() {
-    const session = await getSession()
+  const session = await getSession();
 
-    if(!session?.user){
-        redirect("/sign-in")
-    }
-     await connectDB()
-     const board = await Board.findOne({
-        userId : session.user.id,
-        name : "Job Hunt"
-     })
-     console.log(board)
+  if (!session?.user) {
+    redirect("/sign-in");
+  }
+  await connectDB();
+  const board = await Board.findOne({
+    userId: session.user.id,
+    name: "Job Hunt",
+  });
+  console.log(board);
 
-    return 
+  return (
     <div className="min-h-screen bg-white">
       <div className="container mx-auto p-6">
         <div className="mb-6">
@@ -29,4 +28,5 @@ export default async function Dashboard() {
         <KanbanBoard board={board} userId={session.user.id} />
       </div>
     </div>
+  );
 }
