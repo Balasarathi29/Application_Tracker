@@ -2,8 +2,8 @@ import KanbanBoard from "@/components/kanbanBoard";
 import { getSession } from "@/lib/auth/auth";
 import connectDB from "@/lib/db";
 import { Board } from "@/lib/models";
+import { initializeUserBoard } from "@/lib/init-user-board";
 import { redirect } from "next/navigation";
-
 
 export default async function Dashboard() {
   const session = await getSession();
@@ -12,11 +12,25 @@ export default async function Dashboard() {
     redirect("/sign-in");
   }
   await connectDB();
-  const board = await Board.findOne({
+  let board = await Board.findOne({
     userId: session.user.id,
     name: "Job Hunt",
+  }).populate({
+    path: "columns",
+    populate: { path: "jobApplications" },
   });
-  console.log(board);
+
+  // Auto-create a default board with columns if missing
+  if (!board) {
+    const created = await initializeUserBoard(session.user.id);
+    board = await Board.findById(created._id).populate({
+      path: "columns",
+      populate: { path: "jobApplications" },
+    });
+  }
+
+  // Avoid passing Mongoose docs to the client component
+  const boardData = board ? JSON.parse(JSON.stringify(board)) : null;
 
   return (
     <div className="min-h-screen bg-white">
@@ -25,7 +39,7 @@ export default async function Dashboard() {
           <h1 className="text-3xl font-bold text-black">Job Hunt</h1>
           <p className="text-gray-600">Track your job applications</p>
         </div>
-        <KanbanBoard board={board} userId={session.user.id} />
+        <KanbanBoard board={boardData} userId={session.user.id} />
       </div>
     </div>
   );
