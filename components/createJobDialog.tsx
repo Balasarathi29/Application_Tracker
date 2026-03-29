@@ -76,8 +76,8 @@ export default function CreateJobApplicationDialog({
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Add Job </DialogTitle>
-          <DialogDescription>Track a new job </DialogDescription>
+          <DialogTitle>Add Job Application</DialogTitle>
+          <DialogDescription>Track a new job application</DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit}>
           <div className="space-y-4">
