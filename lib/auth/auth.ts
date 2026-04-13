@@ -22,6 +22,11 @@ export const auth = betterAuth({
   database: mongodbAdapter(db, {
     client,
   }),
+  session : {
+    cookieCache :{
+      enabled : true,
+    }
+  },
   emailAndPassword: {
     enabled: true,
   },
